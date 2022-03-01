@@ -1,0 +1,57 @@
+---
+
+- name: Configure EXT interface
+  fortios_system_interface:
+    vdom: root
+    state: present
+    system_interface:
+      alowaccess: ping
+      ip: 10.10.10.1/24
+      name: 'port2'
+
+- name: Configure LAN interface
+  fortios_system_interface:
+    vdom: root
+    state: present
+    system_interface:
+      alowaccess: ping
+      ip: 10.10.20.1/24
+      name: 'port3'
+
+#- name: Configure ethernet 1/3 interface
+#  panos_interface:
+#    provider: '{{ provider }}'
+#    if_name: 'ethernet1/3'
+#    mode: 'layer3'
+#    ip: ['100.10.20.1/24']
+#    enable_dhcp: false
+#    zone_name: 'ExtDMZ'
+#    vr_name: 'router'
+#    management_profile: 'Empty'
+#
+#- name: Configure ethernet 1/4 interface
+#  panos_interface:
+#    provider: '{{ provider }}'
+#    if_name: 'ethernet1/4'
+#    mode: 'layer3'
+#    ip: ['100.10.30.1/24']
+#    enable_dhcp: false
+#    zone_name: 'SOC'
+#    vr_name: 'router'
+#    management_profile: 'Ping-HTTP'
+#
+#- name: Configure ethernet 1/5 interface
+#  panos_interface:
+#    provider: '{{ provider }}'
+#    if_name: 'ethernet1/5'
+#    mode: 'layer3'
+#    ip: ['100.10.40.1/24']
+#    enable_dhcp: false
+#    zone_name: 'IntDMZ'
+#    vr_name: 'router'
+#    management_profile: 'Ping'
+#
+#- name: Commit configuration
+#  panos_commit_firewall:
+#    provider: '{{ provider }}'
+#

@@ -1,1 +1,36 @@
-localhost ansible_connection=local
+all:
+  hosts:
+    localhost:
+      ansible_connection: local
+  children:
+    FW:
+      hosts:
+        VM50:
+          provider:
+            ip_address: 10.255.0.2
+            username: admin
+            password: 12qwAS!@
+    FORTIGATE:
+      hosts:
+        fortigate01:
+          vars:
+            ansible_user: "admin"
+            ansible_password: "admin-env"
+            ansible_network_os: fortinet.fortios.fortios
+            ansible_connection: fortinet.fortios.httpapi
+            ansible_httpapi_use_ssl: yes
+            ansible_httpapi_validate_certs: no
+            ansible_httpapi_port: 443
+    WINDOWS:
+      vars:
+        ansible_connection: winrm
+        ansible_password: admin-env
+        ansible_winrm_server_cert_validation: ignore
+        ansible_winrm_read_timeout_sec: 200
+        ansible_winrm_operation_timeout_sec: 180
+        ansible_become_method: runas
+    VyOS:
+      vars:
+        ansible_connection: network_cli
+        ansible_network_os: vyos
+        ansible_command_timeout: 60

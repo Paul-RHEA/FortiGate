@@ -1,0 +1,8 @@
+---
+
+
+- name: Change timezone
+  fortios_system_global:
+    vdom: "root"
+    system_global:
+      timezone: 12 #EST
