@@ -11,8 +11,6 @@ all:
             username: admin
             password: 12qwAS!@
     FORTIGATE:
-      hosts:
-        fortigate01:
           vars:
             ansible_user: "admin"
             ansible_password: "admin-env"

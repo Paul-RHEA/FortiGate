@@ -1,13 +1,11 @@
 ---
 
 - name: Configure default route
-  panos_static_route:
-    provider: '{{ provider }}'
-    name: 'Default route'
-    destination: '0.0.0.0/0'
-    nexthop: '100.100.0.1'
-    virtual_router: 'router'
-
-- name: Commit configuration
-  panos_commit_firewall:
-    provider: '{{ provider }}'
+  fortios_router_static:
+    vdom: root
+    state: present
+    router_static:
+      priority: 0
+      dst: 0.0.0.0/0
+      gateway: 10.10.20.1/24
+      device: port3
