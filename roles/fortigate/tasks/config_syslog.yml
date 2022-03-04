@@ -1,59 +1,31 @@
 ---
 
-- name: Create Syslog profile
-  panos_syslog_profile:
-    provider: '{{ provider }}'
-    name: splunk
+- name: Configure FortiGate logs
+  fortios_log_setting:
+    vdom: root
+    log_setting:
+      fwpolicy_implicit_log: enable
+      log_invalid_packet: enable
+      resolve_ip: enable
+      resolve_port: enable
 
-- name: Create Syslog Server profile
-  panos_syslog_server:
-    provider: '{{ provider }}'
-    syslog_profile: splunk
-    name: splunk_srv
-    server: '{{ hostvars.SPLUNK.vm.nics | getUserLayerIP }}'
-    syslog_port: 514
-    transport: 'UDP'
+- name: Configure log event filters
+  fortios_log_eventfilter:
+    vdom: root
+    log_eventfilter:
+      endpoint: enable
+      event: enable
+      router: enable
+      security_rating: enable
+      system: enable
+      user: enable
+      vpn: enable
 
-- name: Create log forwarding profile
-  panos_log_forwarding_profile:
-    provider: '{{ provider }}'
-    name: default
-
-- name: Create log forwarding profiles
-  panos_log_forwarding_profile_match_list:
-    provider: '{{ provider }}'
-    log_forwarding_profile: 'default'
-    name: 'panos_{{ item }}'
-    log_type: '{{ item }}'
-    filter: "All Logs"
-    syslog_profiles: ['splunk']
-  loop:
-    - traffic
-    - threat
-    - url
-    - data
-    - tunnel
-    - auth
-
-- name: Configure route for Syslog service
-  panos_type_cmd:
-    provider: '{{ provider }}'
-    cmd: 'edit'
-    xpath: |
-      /config/devices/entry[@name='localhost.localdomain']
-      /deviceconfig/system/route
-    element: |
-      <route>
-        <service>
-          <entry name="syslog">
-            <source>
-              <address>100.10.30.1/24</address>
-              <interface>ethernet1/4</interface>
-            </source>
-          </entry>
-        </service>
-      </route>
-
-- name: Commit configuration
-  panos_commit_firewall:
-    provider: '{{ provider }}'
+- name: Enable syslog forwarding
+  fortios_log_syslogd_setting:
+    vdom: root
+    log_syslogd_setting:
+      mode: udp
+      port: 514
+      server: 10.10.10.2
+      status: enable

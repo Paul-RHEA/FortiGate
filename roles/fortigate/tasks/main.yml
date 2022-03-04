@@ -20,11 +20,8 @@
 - name: Configure routes
   include_tasks: config_routes.yml
 
-#- name: Configure FW Services
-#  include_tasks: config_services.yml
-
-#- name: Configure Syslog forwarding
-#  include_tasks: config_syslog.yml
+- name: Configure Syslog forwarding
+  include_tasks: config_syslog.yml
 
 - name: Configure FW Security policies
   include_tasks: config_policies.yml
