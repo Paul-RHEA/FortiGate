@@ -1,10 +1,9 @@
 ---
 
-#- name: Wait FW to come up
-#  panos_check:
-#    provider: '{{ provider }}'
-#    interval: 5
-#    timeout: 1200
+- name: Wait FW to come up
+  ping:
+  retries: 1000
+  delay: 5
 
 - name: Configure Management
   include_tasks: config_mgt.yml

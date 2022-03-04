@@ -9,3 +9,7 @@
       dst: 0.0.0.0/0
       gateway: 10.10.20.2
       device: port3
+  register: result
+  failed_when:
+    - result.meta.error != 0
+    - result.meta.error != -15 #Duplicate route
