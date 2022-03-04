@@ -1,0 +1,11 @@
+---
+
+- name: Configure gateway address
+  fortios_firewall_address:
+    vdom: root
+    state: present
+    firewall_address:
+      type: ipmask
+      subnet: '10.10.10.0 255.255.255.0'
+      associated_interface: EXT
+      name: 'EXT subnet'

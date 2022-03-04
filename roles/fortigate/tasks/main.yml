@@ -15,6 +15,9 @@
 - name: Configure interfaces Layer 3
   include_tasks: config_interfaces_layer3.yml
 
+- name: Configure addresses
+  include_tasks: config_addresses.yml
+
 - name: Configure routes
   include_tasks: config_routes.yml
 

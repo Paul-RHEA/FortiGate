@@ -1,0 +1,19 @@
+{
+  "logger": {
+    "title": "Remote Sync"
+  },
+  "uploadOnSave": false,
+  "useAtomicWrites": false,
+  "deleteLocal": false,
+  "hostname": "10.242.0.114",
+  "port": "22",
+  "target": "/CitefAnsibleFiles/scenarioFiles/RHEA/FortiGate",
+  "ignore": [
+    ".remote-sync.json",
+    ".git/**"
+  ],
+  "username": "env-admin",
+  "password": "admin-env",
+  "watch": [],
+  "transport": "scp"
+}

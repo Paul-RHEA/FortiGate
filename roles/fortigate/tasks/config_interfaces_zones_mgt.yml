@@ -6,9 +6,9 @@
     state: present
     system_zone:
       interface:
-        interface_name: port2
-        intrazone: allow
-        name: EXT
+        - interface_name: port2
+      intrazone: allow
+      name: EXT
 
 - name: Enterprise LAN
   fortios_system_zone:
@@ -16,9 +16,9 @@
     state: present
     system_zone:
       interface:
-        interface_name: port3
-        intrazone: allow
-        name: LAN
+        - interface_name: port3
+      intrazone: allow
+      name: LAN
 #
 #- name: ExtDMZ Zone
 #  panos_zone:

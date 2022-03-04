@@ -1,6 +1,5 @@
 ---
 
-
 - name: Allow Traffic from LAN to EXT
   fortios_firewall_policy:
     vdom: root
@@ -11,22 +10,22 @@
       comments: 'Allow Traffic from LAN to EXT'
       name: 'LAN-EXT'
       policyid: 1
+      schedule: 'always'
       srcintf:
-      - LAN
+      - name: LAN
       srcaddr:
-      - all
+      - name: all
       dstintf:
-      - EXT
+      - name: EXT
       dstaddr:
-      - 10.10.10.0/24
+      - name: 'EXT subnet'
       service:
-      - ALL
-      application:
-      - ALL
+      - name: ALL
       nat: enable
       natip: 100.10.10.1/24
       logtraffic: all
       logtraffic_start: enable
+
 
 #- name: Allow Traffic from IntDMZ to LAN
 #  panos_security_rule:
